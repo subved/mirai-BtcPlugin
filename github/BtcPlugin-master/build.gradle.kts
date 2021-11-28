@@ -9,7 +9,7 @@ plugins {
     id("net.mamoe.mirai-console") version "2.6.4"
 }
 
-group = "com.dakuo"
+group = "com.subved"
 version = "1.0-SNAPSHOT"
 
 repositories {

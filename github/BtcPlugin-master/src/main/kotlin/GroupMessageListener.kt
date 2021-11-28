@@ -1,6 +1,6 @@
-package com.dakuo
+package com.subved
 
-import com.dakuo.BtcPlugin.checkPermission
+import com.subved.BtcPlugin.checkPermission
 import config.CommandConfig
 import config.MessageConfig
 import data.CryptoCoinData
@@ -21,24 +21,24 @@ class GroupMessageListener(event: GroupMessageEvent) {
         if (CommandConfig.get.contains(plainText)) {
             if (CryptoCoinData.groupPolicy[event.group.id] != null) {
                 val hashMap:HashMap<String,Double> = HashMap<String,Double>() //define empty hashma
-
+                var symbols = CommandConfig.symbols
                 val current = LocalDateTime.now()
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 val formatted = current.format(formatter)
                 //Date(f1)
-                result = "$formatted 即使行情: \n"
+                result = "$formatted 即时行情: \n"
                 for(symbols in CommandConfig.symbols){
                     val detail = MexcService().getDetail(symbols + "_USDT")
                     if (detail != null) {
                         val data = detail.data
                         if (detail.code == "200") {
-                            hashMap.put(symbols,data.o)
+                            hashMap.put(symbols,data.c)
                         }
                     }
                 }
 
                 if (hashMap.size>0){
-                    for(key in hashMap.keys){
+                    for(key in symbols){
                         result +="$key 当前币价 ${hashMap[key]} 美元\n"
                     }
 

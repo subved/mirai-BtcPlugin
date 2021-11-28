@@ -1,4 +1,4 @@
-package com.dakuo
+package com.subved
 
 import config.CommandConfig
 import config.MessageConfig
