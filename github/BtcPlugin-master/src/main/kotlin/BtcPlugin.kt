@@ -3,6 +3,7 @@ package com.subved
 import config.CommandConfig
 import config.MessageConfig
 import config.SettingsConfig
+import data.CryptoCoinData
 import net.mamoe.mirai.console.permission.Permission
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
@@ -25,8 +26,9 @@ object BtcPlugin : KotlinPlugin(
 
     override fun onEnable() {
         CommandConfig.reload()   //初始化插件指令
-        MessageConfig.reload()   //初始化插件指令
-        SettingsConfig.reload()   //初始化插件指令
+        MessageConfig.reload()   //初始化自定义回复
+        SettingsConfig.reload()   //初始化设置数据
+        CryptoCoinData.reload()   //初始化配置数据
         GlobalEventChannel.subscribeAlways<GroupMessageEvent> {event-> GroupMessageListener(event).monitorSwitch()}
         GlobalEventChannel.subscribeAlways<GroupMessageEvent> {event-> GroupMessageListener(event).monitor()}
 

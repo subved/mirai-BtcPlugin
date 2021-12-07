@@ -20,26 +20,33 @@ class GroupMessageListener(event: GroupMessageEvent) {
         var result = "";
         if (CommandConfig.get.contains(plainText)) {
             if (CryptoCoinData.groupPolicy[event.group.id] != null) {
-                val hashMap:HashMap<String,Double> = HashMap<String,Double>() //define empty hashma
+                val hashMap:HashMap<String,Double?> = HashMap<String,Double?>() //define empty hashma
                 var symbols = CommandConfig.symbols
                 val current = LocalDateTime.now()
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 val formatted = current.format(formatter)
                 //Date(f1)
                 result = "$formatted 即时行情: \n"
-                for(symbols in CommandConfig.symbols){
-                    val detail = MexcService().getDetail(symbols + "_USDT")
-                    if (detail != null) {
-                        val data = detail.data
-                        if (detail.code == "200") {
-                            hashMap.put(symbols,data.c)
-                        }
-                    }
+//                for(symbols in CommandConfig.symbols){
+//                    val detail = MexcService().getDetail(symbols + "_USDT")
+//                    if (detail != null) {
+//                        val data = detail.data
+//                        if (detail.code == "200") {
+//                            hashMap.put(symbols,data.c)
+//                        }
+//                    }
+//                }
+
+                val detail =CmcService().getDetail(CommandConfig.symbols);
+                for (symbol in CommandConfig.symbols){
+                    var price = detail?.data?.get(symbol)?.quote?.get("USD")?.price;
+                    hashMap.put(symbol,price);
                 }
+
 
                 if (hashMap.size>0){
                     for(key in symbols){
-                        result +="$key 当前币价 ${hashMap[key]} 美元\n"
+                        result +="$key 当前币价 ${String.format("%.2f", hashMap[key])} 美元\n"
                     }
 
                     event.group.sendMessage(
