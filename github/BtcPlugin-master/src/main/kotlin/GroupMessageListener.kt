@@ -15,7 +15,7 @@ class GroupMessageListener(event: GroupMessageEvent) {
     var event = event;
 
     var idMap = hashMapOf(1 to "BTC", 2 to "LTC", 3 to "NMC",4 to "TRC",
-        5 to "PPC",1027 to "ETH",5632 to "AR",9258 to "XCH",9891 to "BNX",12082 to "GOLD",
+        5 to "PPC",1027 to "ETH",1321 to "ETC",5632 to "AR",9258 to "XCH",9891 to "BNX",12082 to "GOLD",
         5805 to "AVAX",10334 to "BABY",15158 to "AWOOL")
 
 
