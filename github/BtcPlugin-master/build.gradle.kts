@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.subved"
-version = "1.0-SNAPSHOT"
+version = "1.1-SNAPSHOT"
 
 repositories {
     maven("https://maven.aliyun.com/repository/public")

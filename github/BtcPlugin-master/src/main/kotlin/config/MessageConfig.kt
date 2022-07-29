@@ -49,7 +49,7 @@ object MessageConfig : ReadOnlyPluginConfig("Message") {
 //    val setuSearchKeyNotSet by value("下一条消息请输入搜索的关键词")
 
     @ValueDescription("关闭币价查询的自动回复")
-    val cryptoSearchOff by value("已经关闭了开启币价查询")
+    val cryptoSearchOff by value("已经关闭了币价查询")
     val cryptoSearchOffAlready by value("本群尚未启用开启币价查询插件,无需再次禁用")
 
 //    @ValueDescription("设置普通模式的自动回复")

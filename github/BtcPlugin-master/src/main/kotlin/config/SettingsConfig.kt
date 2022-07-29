@@ -20,5 +20,29 @@ object SettingsConfig : ReadOnlyPluginConfig("Settings") {
     @ValueDescription("设置此插件主人的id。")
     val masterId by value(mutableListOf<Long>(123456))
 
+    @ValueDescription(
+        """
+        代理设置
+        0   不使用代理
+        1   使用http代理
+        2   使用socks代理
+        代理只对 LoliconApi 色图的获取生效
+        """
+    )
+    val proxyConfig by value(0)
+    val httpProxy by value(HttpProxy())
+    val socksProxy by value(SocksProxy())
+
+    @Serializable
+    data class SocksProxy(
+        val host: String = "127.0.0.1",
+        val port: Int = 4001
+    )
+
+    @Serializable
+    data class HttpProxy(
+        val proxy: String = "http://127.0.0.1:80"
+    )
+
 
 }

@@ -1,0 +1,10 @@
+# 群友没有权限的时候的自动回复
+setuNoPermission: 您没有权限操作
+# 币价查询插件未启用自动回复
+setuModeOff: 本群尚未开启插件,请联系管理员
+# 关闭币价查询的自动回复
+setuOff: 已经关闭了开启币价查询
+setuOffAlready: 本群尚未启用开启币价查询插件,无需再次禁用
+# 开启币价查询的自动回复
+cryptoSearchOn: 开启币价查询
+cryptoSearchOnAlready: 本群已经开启币价查询

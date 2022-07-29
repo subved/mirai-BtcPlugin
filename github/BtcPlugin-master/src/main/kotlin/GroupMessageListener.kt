@@ -14,6 +14,12 @@ class GroupMessageListener(event: GroupMessageEvent) {
 
     var event = event;
 
+    var idMap = hashMapOf(1 to "BTC", 2 to "LTC", 3 to "NMC",4 to "TRC",
+        5 to "PPC",1027 to "ETH",5632 to "AR",9258 to "XCH",9891 to "BNX",12082 to "GOLD",
+        5805 to "AVAX",10334 to "BABY",15158 to "AWOOL")
+
+
+
     suspend fun monitor(){
         val message = event.message;
         val plainText = getPlainText(message);
@@ -46,7 +52,15 @@ class GroupMessageListener(event: GroupMessageEvent) {
 
                 if (hashMap.size>0){
                     for(key in symbols){
-                        result +="$key 当前币价 ${String.format("%.2f", hashMap[key])} 美元\n"
+                        if (hashMap[key]!! <= 1.0){
+                            result +="${idMap[key.toInt()]} 当前币价 ${String.format("%.6f", hashMap[key])} 美元\n"
+                        }
+                        else if (hashMap[key]!! <= 10.0){
+                            result +="${idMap[key.toInt()]} 当前币价 ${String.format("%.4f", hashMap[key])} 美元\n"
+                        }
+                        else{
+                            result +="${idMap[key.toInt()]} 当前币价 ${String.format("%.2f", hashMap[key])} 美元\n"
+                        }
                     }
 
                     event.group.sendMessage(
