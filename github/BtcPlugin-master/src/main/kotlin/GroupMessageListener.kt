@@ -14,9 +14,9 @@ class GroupMessageListener(event: GroupMessageEvent) {
 
     var event = event;
 
-    var idMap = hashMapOf(1 to "BTC", 2 to "LTC", 3 to "NMC",4 to "TRC",
-        5 to "PPC",1027 to "ETH",1321 to "ETC",5632 to "AR",9258 to "XCH",9891 to "BNX",12082 to "GOLD",
-        5805 to "AVAX",10334 to "BABY",15158 to "AWOOL")
+//    var idMap = hashMapOf(1 to "BTC", 2 to "LTC", 3 to "NMC",4 to "TRC",
+//        5 to "PPC",1027 to "ETH",1321 to "ETC",5632 to "AR",9258 to "XCH",9891 to "BNX",12082 to "GOLD",
+//        5805 to "AVAX",10334 to "BABY",15158 to "AWOOL")
 
 
 
@@ -27,7 +27,7 @@ class GroupMessageListener(event: GroupMessageEvent) {
         if (CommandConfig.get.contains(plainText)) {
             if (CryptoCoinData.groupPolicy[event.group.id] != null) {
                 val hashMap:HashMap<String,Double?> = HashMap<String,Double?>() //define empty hashma
-                var symbols = CommandConfig.symbols
+                var symbolmaps = CommandConfig.symbolmaps
                 val current = LocalDateTime.now()
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 val formatted = current.format(formatter)
@@ -43,23 +43,23 @@ class GroupMessageListener(event: GroupMessageEvent) {
 //                    }
 //                }
 
-                val detail =CmcService().getDetail(CommandConfig.symbols);
-                for (symbol in CommandConfig.symbols){
-                    var price = detail?.data?.get(symbol)?.quote?.get("USD")?.price;
-                    hashMap.put(symbol,price);
+                val detail =CmcService().getDetail(symbolmaps.keys.toList());
+                for (symbolid in symbolmaps.keys.toList()){
+                    var price = detail?.data?.get(symbolid)?.quote?.get("USD")?.price;
+                    hashMap.put(symbolid,price);
                 }
 
 
                 if (hashMap.size>0){
-                    for(key in symbols){
+                    for(key in symbolmaps.keys.toList()){
                         if (hashMap[key]!! <= 1.0){
-                            result +="${idMap[key.toInt()]} 当前币价 ${String.format("%.6f", hashMap[key])} 美元\n"
+                            result +="${symbolmaps.get(key)} 当前币价 ${String.format("%.6f", hashMap[key])} 美元\n"
                         }
                         else if (hashMap[key]!! <= 10.0){
-                            result +="${idMap[key.toInt()]} 当前币价 ${String.format("%.4f", hashMap[key])} 美元\n"
+                            result +="${symbolmaps.get(key)} 当前币价 ${String.format("%.4f", hashMap[key])} 美元\n"
                         }
                         else{
-                            result +="${idMap[key.toInt()]} 当前币价 ${String.format("%.2f", hashMap[key])} 美元\n"
+                            result +="${symbolmaps.get(key)} 当前币价 ${String.format("%.2f", hashMap[key])} 美元\n"
                         }
                     }
 

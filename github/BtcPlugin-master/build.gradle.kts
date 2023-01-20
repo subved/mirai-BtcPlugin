@@ -1,20 +1,27 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    val kotlinVersion = "1.5.0"
+    val kotlinVersion = "1.5.30"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
 
     id("com.github.johnrengelman.shadow") version "1.2.3"
-    id("net.mamoe.mirai-console") version "2.6.4"
+    id("net.mamoe.mirai-console") version "2.9.1"
 }
 
 group = "com.subved"
-version = "1.1-SNAPSHOT"
+version = "1.2-SNAPSHOT"
 
 repositories {
+
     maven("https://maven.aliyun.com/repository/public")
+    maven { url =uri("https://maven.aliyun.com/nexus/content/repositories/jcenter")}
+    maven {url = uri("https://repo.maven.apache.org/maven2/net/mamoe/")}
+    maven("https://repo.maven.apache.org/maven2/net/mamoe/" )
+    mavenLocal()
     mavenCentral()
+    jcenter()
+
 }
 
 dependencies{

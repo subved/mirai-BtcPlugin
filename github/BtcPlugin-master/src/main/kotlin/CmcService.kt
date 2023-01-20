@@ -34,7 +34,7 @@ class CmcService {
             .build()
 
         var symbols ="";
-        for (symbol in CommandConfig.symbols){
+        for (symbol in CommandConfig.symbolmaps.keys.toList()){
             if (symbols!=""){
                 symbols= "$symbols,$symbol";
             }

@@ -5,7 +5,7 @@ get:
 off: 
   - 关闭插件
   - 封印
-symbols:
+symbolids:
 #BTC
   - 1
 #LTC
@@ -16,3 +16,15 @@ symbols:
   - 9258
 #BABY
   - 10334
+
+symbols:
+#BTC
+  - BTC
+#LTC
+  - LTC
+#ETH
+  - ETH
+#XCH
+  - XCH
+#BABY
+  - BABY
